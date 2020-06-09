@@ -22,3 +22,19 @@ spec:
         env:
           - name: SPRING_PROFILES_ACTIVE
             value: {SPRING_PROFILE}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {APP_NAME}-service
+  labels:
+    app: {APP_NAME}
+spec:
+  type: NodePort
+  selector:
+    app: {APP_NAME}
+  ports:
+  - name: {APP_NAME}
+    port: 40080
+    targetPort: 40080
+    nodePort: 30050
