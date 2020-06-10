@@ -17,7 +17,7 @@ pipeline {
             when { expression { env.GIT_TAG != null } }
             agent {
                 docker {
-                    image 'maven:3-jdk-8-alpine'
+                    image 'harbor.wsecar.cn:10443/aliyun/maven:3-jdk-8'
                     args '-v $HOME/.m2:/root/.m2'
                 }
             }
