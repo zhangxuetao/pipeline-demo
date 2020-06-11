@@ -11,10 +11,14 @@ ENV JAVA_OPTS="" \
 RUN apk update && apk add ca-certificates && \
     apk add tzdata && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" > /etc/timezone && \
-    mkdir -p /data/wanshun/config/apollo/wsShunFengChe && \
-    echo -e 'env=dev\ndev.meta=http://172.18.6.1:6000\n' > /data/wanshun/config/apollo/wsShunFengChe/apollo-env.properties && \
-    echo -e 'dev.meta=http://172.18.5.240:6000\nfat.meta=http://172.18.4.200:6000\nuat.meta=http://172.18.4.210:6000\nentbus.appId=parent\nentbus.namespaces=entbus.kafka,entbus.accessServer' > /data/wanshun/config/apollo/entbus-env.properties
+    echo "Asia/Shanghai" > /etc/timezone
+
+#添加Apollo配置文件
+ADD /data/data.zip /data.zip
+
+RUN unzip /data.zip -d / \
+    && rm -rf /data.zip
+
 
 COPY target/$JAR_FILE $WORK_PATH/
 
