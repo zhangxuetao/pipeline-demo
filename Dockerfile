@@ -13,7 +13,8 @@ RUN apk update && apk add ca-certificates && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone && \
     mkdir -p /data/wanshun/config/apollo/wsShunFengChe && \
-    echo -e 'env=dev\ndev.meta=http://172.18.6.1:6000\n' > /data/wanshun/config/apollo/wsShunFengChe/apollo-env.properties
+    echo -e 'env=dev\ndev.meta=http://172.18.6.1:6000\n' > /data/wanshun/config/apollo/wsShunFengChe/apollo-env.properties && \
+    echo -e 'dev.meta=http://172.18.5.240:6000\nfat.meta=http://172.18.4.200:6000\nuat.meta=http://172.18.4.210:6000\nentbus.appId=parent\nentbus.namespaces=entbus.kafka,entbus.accessServer' > /data/wanshun/config/apollo/entbus-env.properties
 
 COPY target/$JAR_FILE $WORK_PATH/
 
