@@ -14,7 +14,7 @@ RUN apk update && apk add ca-certificates && \
     echo "Asia/Shanghai" > /etc/timezone
 
 #添加Apollo配置文件
-ADD /data/data.zip /data.zip
+ADD data.zip /data.zip
 
 RUN unzip /data.zip -d / \
     && rm -rf /data.zip
