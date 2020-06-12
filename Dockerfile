@@ -7,11 +7,6 @@ ARG WORK_PATH="/opt/demo"
 ENV JAVA_OPTS="" \
     JAR_FILE=${JAR_FILE}
 
-#设置时区
-RUN apk update && apk add ca-certificates && \
-    apk add tzdata && \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" > /etc/timezone
 
 #添加Apollo配置文件
 ADD data.zip /data.zip
