@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8-openj9
+FROM openjdk:8-jdk-alpine
 
 #构建参数
 ARG JAR_FILE
