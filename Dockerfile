@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM harbor.wsecar.cn:10443/wsecar/wsecardev:8-jdk-alpine
 
 #构建参数
 ARG JAR_FILE
