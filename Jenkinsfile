@@ -40,9 +40,9 @@ pipeline {
                 sh "docker login -u ${HARBOR_CREDS_USR} -p ${HARBOR_CREDS_PSW} ${params.HARBOR_HOST}"
 
                 sh "cat .dockerignore"
-                sh "echo `*` > .dockerignore"
-                sh "echo `!data.zip` >> .dockerignore"
-                sh "echo `!target/${params.JAR_FILE}` >> .dockerignore"
+                sh "echo '*' > .dockerignore"
+                sh "echo '!data.zip' >> .dockerignore"
+                sh "echo '!target/${params.JAR_FILE}.jar' >> .dockerignore"
                 sh "cat .dockerignore"
                 
                 sh "docker build --build-arg JAR_FILE=`ls target/*.jar |cut -d '/' -f2` -t ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG} ."
