@@ -11,7 +11,7 @@ pipeline {
         string(name: 'DOCKER_IMAGE', defaultValue: 'test/pipeline-demo', description: 'docker镜像名')
         string(name: 'APP_NAME', defaultValue: 'pipeline-demo', description: 'k8s中标签名')
         string(name: 'K8S_NAMESPACE', defaultValue: 'demo', description: 'k8s的namespace名称')
-        string(name: 'JAR_FILE', defaultValue: 'pipeline-demo', description: 'k8s中标签名')
+        string(name: 'JAR_FILE', defaultValue: 'pipeline-demo-0.0.1-SNAPSHOT', description: 'k8s中标签名')
     }
     stages {
         stage('Maven Build') {
