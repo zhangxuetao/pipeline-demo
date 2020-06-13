@@ -11,6 +11,7 @@ pipeline {
         string(name: 'DOCKER_IMAGE', defaultValue: 'test/pipeline-demo', description: 'docker镜像名')
         string(name: 'APP_NAME', defaultValue: 'pipeline-demo', description: 'k8s中标签名')
         string(name: 'K8S_NAMESPACE', defaultValue: 'demo', description: 'k8s的namespace名称')
+        string(name: 'JAR_FILE', defaultValue: 'pipeline-demo', description: 'k8s中标签名')
     }
     stages {
         stage('Maven Build') {
@@ -37,6 +38,13 @@ pipeline {
             steps {
                 unstash 'app'
                 sh "docker login -u ${HARBOR_CREDS_USR} -p ${HARBOR_CREDS_PSW} ${params.HARBOR_HOST}"
+
+                sh "cat .dockerignore"
+                sh "echo `*` > .dockerignore"
+                sh "echo `!data.zip` >> .dockerignore"
+                sh "echo `!target/${params.JAR_FILE}` >> .dockerignore"
+                sh "cat .dockerignore"
+                
                 sh "docker build --build-arg JAR_FILE=`ls target/*.jar |cut -d '/' -f2` -t ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG} ."
                 sh "docker push ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
                 sh "docker rmi ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
