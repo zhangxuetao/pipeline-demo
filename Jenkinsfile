@@ -23,7 +23,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
+                sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true -Dmaven.compile.fork=true -T 1C'
                 stash includes: 'target/*.jar', name: 'app'
             }
 
